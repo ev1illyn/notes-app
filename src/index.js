@@ -9,12 +9,26 @@ import { DragDropContext } from "react-beautiful-dnd";
 const Container = styled.div`
   display: flex;
 `;
+const Cont = styled.div`
+`;
+const Msg = styled.div`
+  margin: 8px;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  min-width: 220px;
+  font-family: 'Itim', cursive;
+`;
 
 class App extends React.Component {
 
   state = initialData;
+  position = 'Você não moveu nenhuma nota.';
 
-  onDragStart = start => {
+  onDragStart = (start, provided) => {
+    provided.announce(
+      `Você moveu a tarefa de posição: ${start.source.index + 1}.`,
+    );
+    this.position = `Você está movendo a tarefa de posição: ${start.source.index + 1}`;
     const homeIndex = this.state.columnOrder.indexOf(start.source.droppableId);
 
     this.setState({
@@ -22,7 +36,22 @@ class App extends React.Component {
     });
   };
 
-  onDragEnd = result => {
+  onDragUpdate = (update, provided) => {
+    const message = update.destination
+      ? `Você moveu a tarefa para a posição ${update.destination.index + 1}.`
+      : `Essa não é uma área para mover a tarefa.`;
+    this.position = message;
+    provided.announce(message);
+  }
+
+  onDragEnd = (result, provided) => {
+
+    const message = result.destination
+      ? `Você moveu a tarefa de posição ${result.source.index + 1} para a posição ${result.destination.index + 1}.`
+      : `A tarefa foi movida para sua posição inicial.`;
+
+    this.position = message;
+    provided.announce(message);
 
     this.setState({
       homeIndex: null,
@@ -90,25 +119,32 @@ class App extends React.Component {
     };
     this.setState(newState);
 
-  }
+  };
 
   render() {
     return (
 
-      <DragDropContext onDragStart={this.onDragStart} onDragEnd={this.onDragEnd}>
-        <Container>
-          {this.state.columnOrder.map((columnId, index) => {
+      <Cont>
+        <Msg>{this.position}</Msg>
+        <DragDropContext onBeforeDragStart={this.onBeforeDragStart}
+          onDragStart={this.onDragStart}
+          onDragUpdate={this.onDragUpdate}
+          onDragEnd={this.onDragEnd}
+        >
+          <Container>
+            {this.state.columnOrder.map((columnId, index) => {
 
-            const column = this.state.columns[columnId];
-            const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
+              const column = this.state.columns[columnId];
+              const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
 
-            const isDropDisabled = index < this.state.homeIndex;
+              const isDropDisabled = index < this.state.homeIndex;
 
-            return <Column key={column.id} column={column} tasks={tasks} isDropDisabled={isDropDisabled} />;
+              return <Column key={column.id} column={column} tasks={tasks} isDropDisabled={isDropDisabled} />;
 
-          })}
-        </Container>
-      </DragDropContext>
+            })}
+          </Container>
+        </DragDropContext>
+      </Cont>
     );
   }
 }

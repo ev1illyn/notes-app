@@ -36,11 +36,13 @@ export default class Task extends React.Component {
                         {...provided.draggableProps}
                         ref={provided.innerRef}
                         isDragging={snapshot.isDragging}
+                        aria-roledescription="Pressione a barra de espaço para mover a tarefa."
                     >
                         <Handle {...provided.dragHandleProps} />
                         {this.props.task.content}
                     </Container>
-                )}
+                )
+                }
             </Draggable>
         );
     }
