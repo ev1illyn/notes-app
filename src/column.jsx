@@ -2,6 +2,7 @@ import * as React from 'react'
 import styled from 'styled-components';
 import Task from './task';
 import { Droppable } from "react-beautiful-dnd";
+import './index.css';
 
 const Container = styled.div`
     margin: 8px;
@@ -10,6 +11,7 @@ const Container = styled.div`
     width: 220px;
     display: flex;
     flex-direction: column;
+    font-family: 'Itim', cursive;
 `;
 const Title = styled.h3`
     padding: 8px;
