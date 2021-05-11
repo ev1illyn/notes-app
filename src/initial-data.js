@@ -1,11 +1,11 @@
 const initialData = {
     tasks: {
-        'task-1': { id: 'task-1', content: 'play volleyball' },
-        'task-2': { id: 'task-2', content: 'learn react' },
-        'task-3': { id: 'task-3', content: 'work' },
-        'task-4': { id: 'task-4', content: 'watch the walking dead show' },
-        'task-5': { id: 'task-5', content: 'disabled task' },
-        'task-6': { id: 'task-6', content: 'drink coke' }
+        'task-1': { id: 'task-1', content: 'Play volleyball' },
+        'task-2': { id: 'task-2', content: 'Learn react' },
+        'task-3': { id: 'task-3', content: 'Work' },
+        'task-4': { id: 'task-4', content: 'Watch The Walking Dead show' },
+        'task-5': { id: 'task-5', content: 'Disabled task' },
+        'task-6': { id: 'task-6', content: 'Drink coke' }
     },
     columns: {
         'column-1': {

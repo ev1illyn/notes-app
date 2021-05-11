@@ -4,7 +4,7 @@ import { Draggable } from "react-beautiful-dnd";
 
 const Container = styled.div`
     border: 1px solid lightgrey;
-    border-radius: 2px;
+    border-radius: 5px;
     padding: 8px;
     margin-bottom: 8px;
     background-color: ${props =>
@@ -13,24 +13,32 @@ const Container = styled.div`
             : props.isDragging
                 ? 'LightSalmon' : 'Salmon'};
     display: flex;
+    background: white;
+    position: relative;
+    display: flex;
+    justify-content: left;
+    box-shadow: 3px 3px 2px var(--paper-shadow);
+    transform-origin: top left;
+
 `;
 
 const Handle = styled.div`
     width: 20px;
     height: 20px;
-    background-color: orange;
+    background-color: #c7c7c7;
     border-radius: 4px;
     margin-right: 8px;
 `;
 
 export default class Task extends React.Component {
     render() {
+
         const isDragDisabled = this.props.task.id === 'task-5';
+
         return (
-            <Draggable
-                draggableId={this.props.task.id}
-                index={this.props.index}
-                isDragDisabled={isDragDisabled}>
+
+            <Draggable draggableId={this.props.task.id} index={this.props.index} isDragDisabled={isDragDisabled}>
+
                 {(provided, snapshot) => (
                     <Container
                         {...provided.draggableProps}
@@ -43,7 +51,9 @@ export default class Task extends React.Component {
                     </Container>
                 )
                 }
+
             </Draggable>
+
         );
     }
 }

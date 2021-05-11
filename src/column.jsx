@@ -7,37 +7,42 @@ import './index.css';
 const Container = styled.div`
     margin: 8px;
     border: 1px solid lightgrey;
-    border-radius: 2px;
+    border-radius: 5px;
     width: 220px;
     display: flex;
     flex-direction: column;
     font-family: 'Itim', cursive;
+    background-color: #d4d4d4;
 `;
+
 const Title = styled.h3`
     padding: 8px;
+    color: #79888b;
 `;
+
 const TaskList = styled.div`
     padding: 8px;
-    color: white;
-    background-color: ${props => (props.isDraggingOver ? 'Lavender' : 'Thistle')};
+    color: fff;
+    background-color: ${props => (props.isDraggingOver ? '#c7c7c7' : '#d4d4d4')};
     flex-grow: 1;
-    min-height: 100px;
 `;
+
+
 
 export default class Column extends React.Component {
     render() {
         return (
             <Container>
+
                 <Title>{this.props.column.title}</Title>
+
                 <Droppable
                     droppableId={this.props.column.id}
                     isDropDisabled={this.props.isDropDisabled}
                 >
                     {(provided, snapshot) => (
-                        <TaskList ref={provided.innerRef}
-                            {...provided.droppableProps}
-                            isDraggingOver={snapshot.isDraggingOver}
-                        >
+                        <TaskList ref={provided.innerRef} {...provided.droppableProps}
+                            isDraggingOver={snapshot.isDraggingOver}>
 
                             {this.props.tasks.map((task, index) => (
                                 <Task key={task.id} task={task} index={index} />
@@ -46,6 +51,7 @@ export default class Column extends React.Component {
                         </TaskList>
                     )}
                 </Droppable>
+
             </Container>
         );
     }

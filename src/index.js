@@ -5,18 +5,28 @@ import styled from 'styled-components';
 import initialData from './initial-data';
 import Column from "./column";
 import { DragDropContext } from "react-beautiful-dnd";
+import AddTask from './add-task';
 
 const Container = styled.div`
   display: flex;
 `;
+
 const Cont = styled.div`
 `;
-const Msg = styled.div`
-  margin: 8px;
+
+const Status = styled.div`
+  margin: 10px auto;
+  padding: 8px;
   border: 1px solid lightgrey;
-  border-radius: 2px;
-  min-width: 220px;
+  border-radius: 5px;
+  width: 220px;
+  display: flex;
+  flex-direction: column;
   font-family: 'Itim', cursive;
+  background-color: white;
+`;
+
+const Footer = styled.h3`
 `;
 
 class App extends React.Component {
@@ -121,31 +131,83 @@ class App extends React.Component {
 
   };
 
+  addTask = (task) => {
+
+    let taskNumber = (Object.keys(this.state.tasks).length);
+    let taskName = 'task-' + (taskNumber + 1);
+
+
+    const newTasksIds = Array.from(this.state.columns['column-1'].taskIds);
+    newTasksIds.push(taskName);
+
+    const newState = {
+      ...this.state,
+      columns: {
+        ...this.state.columns,
+        'column-1': {
+          ...this.state.columns['column-1'],
+          taskIds: newTasksIds,
+        },
+      },
+      tasks: {
+        ...this.state.tasks,
+        [taskName]: {
+          id: taskName,
+          content: task
+        },
+      },
+    };
+
+    this.setState(newState);
+
+    //console.log(newState);
+    //console.log(this.state);
+    //console.log('---------');
+    //adicionar tasks para as colunas, inserir de verdade na tela
+  }
+
   render() {
+
+
     return (
 
       <Cont>
-        <Msg>{this.position}</Msg>
+
+        <Status>{this.position}</Status>
+
         <DragDropContext onBeforeDragStart={this.onBeforeDragStart}
           onDragStart={this.onDragStart}
           onDragUpdate={this.onDragUpdate}
           onDragEnd={this.onDragEnd}
         >
+
           <Container>
             {this.state.columnOrder.map((columnId, index) => {
 
-              const column = this.state.columns[columnId];
-              const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
+              let column = this.state.columns[columnId];
 
-              const isDropDisabled = index < this.state.homeIndex;
+              console.log(this.state);
+              console.log('__________________________________');
 
-              return <Column key={column.id} column={column} tasks={tasks} isDropDisabled={isDropDisabled} />;
+              let tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
+
+              let isDropDisabled = index < this.state.homeIndex;
+
+              return <Column key={column.id} column={column} tasks={tasks} isDropDisabled={isDropDisabled} state={this.state} />;
 
             })}
           </Container>
+
         </DragDropContext>
+
+        <Footer>
+          <AddTask addTask={this.addTask}></AddTask>
+        </Footer>
+
       </Cont>
+
     );
+
   }
 }
 
