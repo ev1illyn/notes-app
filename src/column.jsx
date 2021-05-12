@@ -8,7 +8,7 @@ const Container = styled.div`
     margin: 8px;
     border: 1px solid lightgrey;
     border-radius: 5px;
-    width: 220px;
+    width: 520px;
     display: flex;
     flex-direction: column;
     font-family: 'Itim', cursive;
@@ -17,7 +17,7 @@ const Container = styled.div`
 
 const Title = styled.h3`
     padding: 8px;
-    color: #79888b;
+    background-color:rgb(240, 240, 240);
 `;
 
 const TaskList = styled.div`

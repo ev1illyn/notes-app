@@ -16,8 +16,6 @@ export default function AddTask({ addTask }) {
         e.preventDefault();
         addTask(task.data);
         setTask({ data: "" });
-        //console.log(task);
-        //console.log('---------');
 
     };
 
@@ -28,7 +26,7 @@ export default function AddTask({ addTask }) {
                     className="form-control"
                     type="text"
                     value={task.data}
-                    placeholder="Type new task..."
+                    placeholder="Type a new task..."
                     onSubmit={submitTask}
                     onChange={handleInputChange}
                 ></input>

@@ -1,12 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
 
 body {
-    --color-one: #ba4aff;
-    --color-two: #00b7ff;
+    --color-one: #ff52b7;
+    --color-two: #5972ff;
     background: linear-gradient(
         135deg,
         var(--color-one),
         50%,
         var(--color-two)
     );
+}
+input {
+    font-family:inherit;
 }

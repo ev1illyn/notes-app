@@ -19,7 +19,6 @@ const Container = styled.div`
     justify-content: left;
     box-shadow: 3px 3px 2px var(--paper-shadow);
     transform-origin: top left;
-
 `;
 
 const Handle = styled.div`

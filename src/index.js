@@ -14,6 +14,17 @@ const Container = styled.div`
 const Cont = styled.div`
 `;
 
+const Header = styled.div`
+  width:100vw;
+  height:40px;
+  background-color:black;
+  opacity: 0.1;
+  font-family: 'Itim', cursive;
+  color:white;
+  font-size:30px;
+  text-align:center;
+`;
+
 const Status = styled.div`
   margin: 10px auto;
   padding: 8px;
@@ -23,22 +34,31 @@ const Status = styled.div`
   display: flex;
   flex-direction: column;
   font-family: 'Itim', cursive;
-  background-color: white;
+  background-color:rgb(240, 240, 240);
 `;
 
 const Footer = styled.h3`
+  margin: 10px auto;
+  padding: 8px;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Itim', cursive;
+  background-color:rgb(240, 240, 240);
 `;
 
 class App extends React.Component {
 
   state = initialData;
-  position = 'Você não moveu nenhuma nota.';
+  position = 'You did not lifted any task.';
 
   onDragStart = (start, provided) => {
     provided.announce(
-      `Você moveu a tarefa de posição: ${start.source.index + 1}.`,
+      `You have lifted the task in position: ${start.source.index + 1}.`,
     );
-    this.position = `Você está movendo a tarefa de posição: ${start.source.index + 1}`;
+    this.position = `You are lifting the task in position: ${start.source.index + 1}`;
     const homeIndex = this.state.columnOrder.indexOf(start.source.droppableId);
 
     this.setState({
@@ -48,8 +68,8 @@ class App extends React.Component {
 
   onDragUpdate = (update, provided) => {
     const message = update.destination
-      ? `Você moveu a tarefa para a posição ${update.destination.index + 1}.`
-      : `Essa não é uma área para mover a tarefa.`;
+      ? `You have moved the task to position ${update.destination.index + 1}.`
+      : `You are currently not over a droppable area`;
     this.position = message;
     provided.announce(message);
   }
@@ -57,8 +77,8 @@ class App extends React.Component {
   onDragEnd = (result, provided) => {
 
     const message = result.destination
-      ? `Você moveu a tarefa de posição ${result.source.index + 1} para a posição ${result.destination.index + 1}.`
-      : `A tarefa foi movida para sua posição inicial.`;
+      ? `You have moved the task from position ${result.source.index + 1} to ${result.destination.index + 1}.`
+      : `The task has been returned to its starting position of.`;
 
     this.position = message;
     provided.announce(message);
@@ -173,6 +193,7 @@ class App extends React.Component {
 
       <Cont>
 
+        <Header>NOTES APP</Header>
         <Status>{this.position}</Status>
 
         <DragDropContext onBeforeDragStart={this.onBeforeDragStart}
@@ -185,9 +206,6 @@ class App extends React.Component {
             {this.state.columnOrder.map((columnId, index) => {
 
               let column = this.state.columns[columnId];
-
-              console.log(this.state);
-              console.log('__________________________________');
 
               let tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
 
