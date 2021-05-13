@@ -1,3 +1,16 @@
+# notes-app
+## a small project to add notes intended to learn more of react and react-beautiful-dnd drag and drop library
+
+## demo 
+### add a task
+![alt text](https://i.snipboard.io/U36p8F.jpg)
+### moving a task between columns
+![alt text](https://i.snipboard.io/d6q0IN.jpg)
+### status of the moved task
+![alt text](https://i.snipboard.io/u5iQle.jpg)
+
+_______________
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
