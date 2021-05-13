@@ -1,7 +1,8 @@
 # notes-app
 ## a small project to add notes intended to learn more of react and react-beautiful-dnd drag and drop library
+### features will be ready when they're ready don't worry >.<
 
-## demo 
+## demo
 ### add a task
 ![alt text](https://i.snipboard.io/U36p8F.jpg)
 ### moving a task between columns
