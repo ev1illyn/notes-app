@@ -27,9 +27,8 @@ const TaskList = styled.div`
     flex-grow: 1;
 `;
 
-
-
 export default class Column extends React.Component {
+
     render() {
         return (
             <Container>

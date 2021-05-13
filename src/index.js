@@ -58,7 +58,7 @@ class App extends React.Component {
     provided.announce(
       `You have lifted the task in position: ${start.source.index + 1}.`,
     );
-    this.position = `You are lifting the task in position: ${start.source.index + 1}`;
+    this.position = `You are lifting the task in ${start.source.index + 1} position ${start.source.index + 1}`;
     const homeIndex = this.state.columnOrder.indexOf(start.source.droppableId);
 
     this.setState({
@@ -68,7 +68,7 @@ class App extends React.Component {
 
   onDragUpdate = (update, provided) => {
     const message = update.destination
-      ? `You have moved the task to position ${update.destination.index + 1}.`
+      ? `You have moved the task to ${update.destination.droppableId}, position ${update.destination.index + 1}.`
       : `You are currently not over a droppable area`;
     this.position = message;
     provided.announce(message);
@@ -77,7 +77,7 @@ class App extends React.Component {
   onDragEnd = (result, provided) => {
 
     const message = result.destination
-      ? `You have moved the task from position ${result.source.index + 1} to ${result.destination.index + 1}.`
+      ? `You have moved the task from ${result.source.droppableId}, position ${result.source.index + 1} to ${result.destination.droppableId}, position ${result.destination.index + 1}.`
       : `The task has been returned to its starting position of.`;
 
     this.position = message;
@@ -156,7 +156,6 @@ class App extends React.Component {
     let taskNumber = (Object.keys(this.state.tasks).length);
     let taskName = 'task-' + (taskNumber + 1);
 
-
     const newTasksIds = Array.from(this.state.columns['column-1'].taskIds);
     newTasksIds.push(taskName);
 
@@ -179,11 +178,6 @@ class App extends React.Component {
     };
 
     this.setState(newState);
-
-    //console.log(newState);
-    //console.log(this.state);
-    //console.log('---------');
-    //adicionar tasks para as colunas, inserir de verdade na tela
   }
 
   render() {
@@ -211,7 +205,9 @@ class App extends React.Component {
 
               let isDropDisabled = index < this.state.homeIndex;
 
-              return <Column key={column.id} column={column} tasks={tasks} isDropDisabled={isDropDisabled} state={this.state} />;
+              return <Column key={column.id} column={column} tasks={tasks}
+                taskList={this.state}
+                isDropDisabled={isDropDisabled} />;
 
             })}
           </Container>

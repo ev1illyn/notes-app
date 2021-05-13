@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
 
 body {
-    --color-one: #ff52b7;
-    --color-two: #5972ff;
+    --color-one: #5972ff;
+    --color-two: #ff52b7;
     background: linear-gradient(
-        135deg,
+        60deg,
         var(--color-one),
         50%,
         var(--color-two)
